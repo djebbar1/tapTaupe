@@ -1,100 +1,40 @@
-//let x = Math.random() * 100;
-//document.getElementById("demo").innerHTML = x;
-//$("span").hide(5);
-//let x = $("#img").math.random()*10;
+$(document).ready(function () {
+  let $indexAleatoire;
+  let point = 0;
+  let scoreElement = $("#count");
 
-/*let point=0;
-$(document).ready(function(){
-    $("p").click(function(){
-      $("#im").hide();
-    });
-    $("#show").click(function(){
-      $("span").show();
-    });
-  });*/
-//$(p).click(function(){ // Waits until the page is ready
-// Write your JS code here
-//let $x = [];
+  $(".taupe").hide();
 
-//for( let i = 0; i < 9; i++ ) {
-  $(document).ready(function () {
-    let $indexAleatoire;
-    let point = 0;
-    let score = $("#count");
-    //$(".dott").show();
-    $(".taupe").hide();
-   
-    //$( this ).toggleClass( ".taup" );
-   // point++;
-    //e.stopPropagation();
-    setInterval(function () {
+  setInterval(function () {
+      let $tabDiv = $(".taupe");
 
-        let $tabDiv = $(".taupe");
-       
-        //point++;
-        $($indexAleatoire).hide();
-        $indexAleatoire = $tabDiv[Math.floor((Math.random() * $tabDiv.length))];
-      
-       // e.stopPropagation();
-        //$(".taupe").show();
-        //$($indexAleatoire).hide(200);
-        // je compare si mon index de mon tableau tabdiv soit different ou non par rapport à ma variable aleatoire 
-        // if (!$indexAleatoire.children(".taupe").length) {
-     
-       // $($indexAleatoire).addClass(".taupe");
-        
-       $($indexAleatoire).show();
-       //$($indexAleatoire).hide();
-          $( ".taupe" ).click(function() {
-            if (!$indexAleatoire.children(".taupe").length) {
-              
-     
-          //$( "div" ).find(".dott").eq(".taupe").toggleClass( ".taupe" );
-            point++;
-            //$( this ).toggleClass( ".taupe" );
-            //
-            //}
-            //e.stopPropagation();
-            //console.log(point);
-            $(score).text(point);
-       
+      // Détacher l'événement de clic des taupes précédentes
+      $tabDiv.off("click");
 
-            
-            //$($indexAleatoire).removeClass("taupe");
-            }
-            $($indexAleatoire).remove();
-            //$($indexAleatoire).show(200);
-            // Waits until the page is ready
-            //console.log(point);
-            //$(count).text(point);
-        })
-        setTimeout(function () {
-            //$($indexAleatoire).removeClass("taupe");
-        }, 1000);
+      // Masquer la taupe actuellement affichée
+      if ($indexAleatoire) {
+          $($indexAleatoire).hide();
+      }
 
-        // }
+      // Choisir une nouvelle taupe aléatoirement
+      $indexAleatoire = $tabDiv.eq(Math.floor(Math.random() * $tabDiv.length));
 
-        //$($indexAleatoire).show();
-        //$($indexAleatoire).hide();
-    }, 1100)
+      // Afficher la nouvelle taupe
+      $($indexAleatoire).show();
 
-    $($indexAleatoire).hide();
-})
-    // Write your JS code here
-    //$(".dot").css('backgroundImage', 'url("../images/11.png")');
-    //.innerHTML= x;
-    //$(this).hide(5);
-    //i++;
-    //point=i;
-    //$(".dot").show(10);
-    //console.
-    //console.log("Score: " + i);
-    //console.log("Score: " + i);
-    /*
-        $( ".dott" ).click(function() {
-            $( "span:last-child" ).hide( "fast", function() {
-              // Use arguments.callee so we don't need a named function
-              $( this ).hide( "slow", arguments.callee );
-            });
-          });*/
-    //});
+      // Gérer le clic sur la taupe
+      $($indexAleatoire).click(function () {
+          if (!$indexAleatoire.children(".taupe").length) {
+              point++;
+              scoreElement.text(point); // Utilisez scoreElement ici
+          }
+          $($indexAleatoire).remove();
+      });
+
+      setTimeout(function () {
+          // Masquer la taupe après un certain délai (1 200 millisecondes dans votre code initial)
+          $($indexAleatoire).hide();
+      }, 1200);
+
+  }, 2100);
+});
